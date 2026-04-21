@@ -138,7 +138,7 @@ export default function App() {
       </section>
 
       {/* Intro Section */}
-      <section id="o-nas" className="py-32 px-6">
+      <section id="o-nas" className="py-32 px-6 scroll-mt-20">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -186,7 +186,7 @@ export default function App() {
       </section>
 
       {/* Services Section */}
-      <section id="oferta" className="py-32 bg-[#E8E4DD]/50 px-6 border-y border-beige">
+      <section id="oferta" className="py-32 bg-[#E8E4DD]/50 px-6 border-y border-beige scroll-mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <span className="uppercase tracking-[0.4em] text-sand font-bold text-xs mb-4 block">Usługi</span>
@@ -220,7 +220,7 @@ export default function App() {
       </section>
 
       {/* Gallery Section */}
-      <section id="galeria" className="py-32 px-6 bg-paper">
+      <section id="galeria" className="py-32 px-6 bg-paper scroll-mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-10 border-b border-beige pb-10">
             <div className="text-left">
@@ -259,7 +259,7 @@ export default function App() {
       </section>
 
       {/* Map Section */}
-      <section className="py-32 bg-[#E8E4DD]/30 px-6 border-y border-beige">
+      <section id="kontakt" className="py-32 bg-[#E8E4DD]/30 px-6 border-y border-beige scroll-mt-20">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-24 items-center">
           <div className="flex flex-col justify-center">
             <h2 className="font-serif text-4xl md:text-5xl mb-12 text-sage">Jak do nas <span className="italic">trafić</span>?</h2>
@@ -311,7 +311,7 @@ export default function App() {
       </section>
 
       {/* Footer Section */}
-      <footer id="kontakt" className="bg-paper text-sage py-32 px-6">
+      <footer className="bg-paper text-sage py-32 px-6">
         <div className="max-w-7xl mx-auto border-t border-beige pt-20">
           <div className="flex flex-col md:flex-row justify-between items-start gap-16 mb-24">
             <div className="max-w-md">
