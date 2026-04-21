@@ -24,5 +24,9 @@ jobs:
     - name: Build
       run: npm run build
 
-    # You can add deployment steps here, e.g., to GitHub Pages, Firebase Hosting, AWS S3, etc.
-    # For now, this just verifies that the build works.
+    - name: Deploy to GitHub Pages
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: dist
+        branch: gh-pages
