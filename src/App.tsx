@@ -1,5 +1,6 @@
-import { motion } from "motion/react";
-import { Phone, MapPin, Facebook, Clock, Utensils, Heart, Gift, Users } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Phone, MapPin, Facebook, Clock, Utensils, Heart, Gift, Users, Menu, X } from "lucide-react";
 
 const IMAGES = [
   "https://scontent-waw2-1.xx.fbcdn.net/v/t39.30808-6/615435702_864464289706006_8858293835727325583_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=7b2446&_nc_ohc=Xk0b8b4pPCsQ7kNvwFYFVtN&_nc_oc=AdpzF6Xp5tRrJDDU48oQEzfjCHxIfI-PkI8lrgSAUu3d4Mt-YZ38rNprejY8PwUedRk&_nc_zt=23&_nc_ht=scontent-waw2-1.xx&_nc_gid=cRhQPzrTkKbeqVIbQcEskA&_nc_ss=7a3a8&oh=00_Af2E5KdrC8EMMqe3u1oAI6wvoXd6UBcFCCAoMKQVYFn8WQ&oe=69ED365E",
@@ -13,6 +14,15 @@ const IMAGES = [
 ];
 
 export default function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navLinks = [
+    { href: "#o-nas", label: "O nas" },
+    { href: "#oferta", label: "Oferta" },
+    { href: "#galeria", label: "Galeria" },
+    { href: "#kontakt", label: "Kontakt" },
+  ];
+
   return (
     <div className="min-h-screen bg-paper text-ink font-sans overflow-x-hidden">
       {/* Navigation */}
@@ -26,22 +36,62 @@ export default function App() {
               Sala Bankietowa
             </span>
           </div>
+
+          {/* Desktop Links */}
           <div className="hidden md:flex gap-10 text-xs font-bold uppercase tracking-[0.2em] text-olive">
-            <a href="#o-nas" className="hover:text-sage transition-colors">O nas</a>
-            <a href="#oferta" className="hover:text-sage transition-colors">Oferta</a>
-            <a href="#galeria" className="hover:text-sage transition-colors">Galeria</a>
-            <a href="#kontakt" className="hover:text-sage transition-colors">Kontakt</a>
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} className="hover:text-sage transition-colors">
+                {link.label}
+              </a>
+            ))}
           </div>
-          <a
-            href="https://www.facebook.com/profile.php?id=100084273290658"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 bg-[#1877F2] text-white px-5 py-2.5 rounded-xl text-xs font-bold tracking-wide hover:shadow-lg transition-all active:scale-95"
-          >
-            <Facebook size={16} />
-            <span className="hidden sm:inline uppercase">Odwiedź nas</span>
-          </a>
+
+          <div className="flex items-center gap-4">
+            <a
+              href="https://www.facebook.com/profile.php?id=100084273290658"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 bg-[#1877F2] text-white px-5 py-2.5 rounded-xl text-xs font-bold tracking-wide hover:shadow-lg transition-all active:scale-95"
+            >
+              <Facebook size={16} />
+              <span className="hidden sm:inline uppercase">Odwiedź nas</span>
+            </a>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden p-2 text-sage hover:bg-paper rounded-lg transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-beige overflow-hidden shadow-xl"
+            >
+              <div className="flex flex-col p-6 gap-6 text-sm font-bold uppercase tracking-[0.2em] text-olive">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="hover:text-sage transition-colors pb-4 border-b border-paper last:border-0"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero Section */}
